@@ -4,10 +4,10 @@ from utils import set_default_commands
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # Формат сообщения
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('bot.log'),  # Записывать лог в файл
-        logging.StreamHandler()  # Также выводить лог в консоль (опционально)
+        logging.FileHandler('bot.log'),
+        logging.StreamHandler()
     ]
 )
 
