@@ -13,12 +13,14 @@ from states import ApiState
 # ===== Работа с API интеграцией ===== #
 
 
-@dp.message_handler(Command("weather"))
-async def handle_weather_command(message: types.Message):
+@dp.message_handler(Command("weather"), state="*")
+async def handle_weather_command(message: types.Message, state: FSMContext):
     """
     Хандлер команды /weather
     """
-
+    
+    await state.finish()
+    
     await message.answer("Отправьте название города")
     await ApiState.send_city_name.set()
 
