@@ -13,11 +13,13 @@ logger = logging.getLogger(__name__)
 # ===== Работа с изображениями ===== #
 
 
-@dp.message_handler(Command("photo"))
-async def handle_photo_command(message: types.Message):
+@dp.message_handler(Command("photo"), state="*")
+async def handle_photo_command(message: types.Message, state: FSMContext):
     """
     Хандлер команды /photo
     """
+    
+    await state.finish()
 
     await SendPhotoState.send_photo.set()
     await message.answer("Отправьте изображение")
