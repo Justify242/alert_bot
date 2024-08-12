@@ -16,11 +16,13 @@ db = Database()
 # ===== Работа с пользователями ===== #
 
 
-@dp.message_handler(Command("account"))
-async def handle_account_command(message: types.Message):
+@dp.message_handler(Command("account"), state="*")
+async def handle_account_command(message: types.Message, state: FSMContext):
     """
     Хандлер команды /account
     """
+    
+    await state.finish()
 
     await message.answer("Как Вас зовут?")
     await AccountState.enter_full_name.set()
