@@ -1,4 +1,5 @@
 from aiogram import types
+from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 
 from loader import dp
@@ -9,12 +10,14 @@ from keyboards.inline.base_keyboards import callback_data as cd
 # ===== Работа с inline кнопками ===== #
 
 
-@dp.message_handler(Command("inline"))
-async def handle_inline_command(message: types.Message):
+@dp.message_handler(Command("inline"), state="*")
+async def handle_inline_command(message: types.Message, state: FSMContext):
     """
     Хандлер команды /inline
     """
-
+    
+    await state.finish()
+    
     markup = SelectionInlineKeyboard()
     await message.answer("Выберите действие", reply_markup=markup.get_keyboard())
 
