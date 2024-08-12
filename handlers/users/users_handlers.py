@@ -28,8 +28,8 @@ async def handle_account_command(message: types.Message, state: FSMContext):
     await AccountState.enter_full_name.set()
 
 
-@dp.message_handler(Command("users"))
-async def handle_users_command(message: types.Message):
+@dp.message_handler(Command("users"), state="*")
+async def handle_users_command(message: types.Message, state: FSMContext):
     """
     Хандлер команды /users
     """
