@@ -11,8 +11,10 @@ from states import CeleryStates
 db = Database()
 
 
-@dp.message_handler(Command("hello"))
-async def handle_hello_command(message: types.Message):
+@dp.message_handler(Command("hello"), state="*")
+async def handle_hello_command(message: types.Message, state: FSMContext):
+    await state.finish()
+    
     await CeleryStates.hello.set()
     await message.answer(f"Привет, {message.from_user.username}! Как ты сегодня?")
     db.add_to_queue(message.from_user.id)
